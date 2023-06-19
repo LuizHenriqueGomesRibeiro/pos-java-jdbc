@@ -1,4 +1,4 @@
-package conexaojdbc;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,7 +24,6 @@ public class SingleConnection {
 				connection=DriverManager.getConnection(url, user, password);
 				connection.setAutoCommit(false);
 				System.out.println("Conectou com sucesso.");
-				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
