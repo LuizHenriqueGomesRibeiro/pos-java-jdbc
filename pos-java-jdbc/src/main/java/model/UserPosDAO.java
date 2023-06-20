@@ -22,7 +22,9 @@ public class UserPosDAO{
 			insert.setString(1, userposjava.getNome());
 			insert.setString(2, userposjava.getEmail());
 			insert.execute();
+			
 			connection.commit();
+			
 		} catch (SQLException e) {
 			// TODO: handle exception
 			try {
@@ -135,5 +137,56 @@ public class UserPosDAO{
 				e2.printStackTrace();
 			}
 		}
+	}
+	
+	public List<BeanUserFone> listaUserFone (Long idUser){
+		List<BeanUserFone> beanUserFones = new ArrayList<BeanUserFone>();
+		
+		try {
+			String sql="SELECT usuariopessoa, nome, numero, tipo, email FROM telefoneuser AS fone INNER JOIN userposjava AS userp ON fone.usuariopessoa = "+idUser;
+			
+			PreparedStatement statement=connection.prepareStatement(sql);
+			ResultSet result=statement.executeQuery();
+			
+			while(result.next()) {
+				BeanUserFone beanUserFone=new BeanUserFone();
+				
+				beanUserFone.setEmail(result.getString("email"));
+				beanUserFone.setNome(result.getString("nome"));
+				beanUserFone.setNumero(result.getString("numero"));
+				beanUserFones.add(beanUserFone);
+			}
+			
+			return beanUserFones;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
+		}
+	}
+	
+	public void deleteFonesPorUser(Long idUser) {
+		try {
+			String fone="DELETE FROM telefoneuser WHERE usuariopessoa ="+idUser;
+			String user="DELETE FROM userposjava WHERE id ="+idUser;
+		
+			PreparedStatement preparedStatement=connection.prepareStatement(user);
+			preparedStatement.executeUpdate();
+			connection.commit();
+			
+			preparedStatement=connection.prepareStatement(fone);
+			preparedStatement.execute();
+			connection.commit();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+			try {
+				connection.rollback();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				System.out.println(e2);
+			}
+		}	
 	}
 }

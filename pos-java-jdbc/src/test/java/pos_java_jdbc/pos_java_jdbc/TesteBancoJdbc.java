@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import model.BeanUserFone;
 import model.Telefone;
 import model.UserPosDAO;
 import model.Userposjava;
@@ -63,9 +64,9 @@ public class TesteBancoJdbc{
 
 		try {
 			UserPosDAO dao = new UserPosDAO();
-			Userposjava objetoBanco=dao.buscar(7L);
+			Userposjava objetoBanco=dao.buscar(4L);
 			
-			objetoBanco.setNome("Luiz Gostosão");
+			objetoBanco.setNome("Piribinho Filho");
 			
 			dao.atualizar(objetoBanco);
 			
@@ -94,6 +95,27 @@ public class TesteBancoJdbc{
 	}
 	
 	@Test
+	public void testeCarregaFoneUser() {
+		try {
+			UserPosDAO dao=new UserPosDAO();
+			List<BeanUserFone> beanUserFones=dao.listaUserFone(3L);
+			
+			for (BeanUserFone beanUserFone : beanUserFones) {
+				System.out.println("-----------------------------------------------------"
+						+ "-----------------------------------------------------"
+						+ "-----------------------------------------------------");
+				System.out.println(beanUserFone);
+				System.out.println("-----------------------------------------------------"
+						+ "-----------------------------------------------------"
+						+ "-----------------------------------------------------");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	@Test
 	public void insertTelefone() {
 		Telefone telefone = new Telefone();
 		
@@ -104,5 +126,11 @@ public class TesteBancoJdbc{
 		UserPosDAO dao = new UserPosDAO();
 		
 		dao.salvarTelefone(telefone);
+	}
+	
+	@Test
+	public void deleteUserFone() {
+		UserPosDAO dao = new UserPosDAO();
+		dao.deleteFonesPorUser(3L);
 	}
 }
