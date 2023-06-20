@@ -170,11 +170,11 @@ public class UserPosDAO{
 			String fone="DELETE FROM telefoneuser WHERE usuariopessoa ="+idUser;
 			String user="DELETE FROM userposjava WHERE id ="+idUser;
 		
-			PreparedStatement preparedStatement=connection.prepareStatement(user);
+			PreparedStatement preparedStatement=connection.prepareStatement(fone);
 			preparedStatement.executeUpdate();
 			connection.commit();
 			
-			preparedStatement=connection.prepareStatement(fone);
+			preparedStatement=connection.prepareStatement(user);
 			preparedStatement.execute();
 			connection.commit();
 			

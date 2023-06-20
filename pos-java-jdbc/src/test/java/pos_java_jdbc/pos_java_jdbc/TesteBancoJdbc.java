@@ -29,7 +29,7 @@ public class TesteBancoJdbc{
 			List<Userposjava> lista=dao.listar();
 			
 			for (Userposjava userposjava : lista) {
-				System.out.println(userposjava);
+				System.out.println(4*userposjava.getId());
 				System.out.println("-----------------------------------------------------"
 			    + "----------------------------------------------------------------------------------------------------------");
 			}
@@ -98,7 +98,7 @@ public class TesteBancoJdbc{
 	public void testeCarregaFoneUser() {
 		try {
 			UserPosDAO dao=new UserPosDAO();
-			List<BeanUserFone> beanUserFones=dao.listaUserFone(3L);
+			List<BeanUserFone> beanUserFones=dao.listaUserFone(4L);
 			
 			for (BeanUserFone beanUserFone : beanUserFones) {
 				System.out.println("-----------------------------------------------------"
